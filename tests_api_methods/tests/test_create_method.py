@@ -13,7 +13,7 @@ def test_validate_create_method():
         validate(response_body, schema=json.loads(file.read()))
 
 
-def test_job_name_returns_in_response_create_method():
+def test_options_returns_in_response_create_method():
     job = "master"
     name = "morpheus"
 
