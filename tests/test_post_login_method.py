@@ -12,7 +12,7 @@ def test_validate_login_method():
     response_body = response.json()
 
     assert response.status_code == 200
-    with open("../schemas/login.json") as file:
+    with open("schemas/login.json") as file:
         validate(response_body, schema=json.loads(file.read()))
 
 

@@ -9,7 +9,7 @@ def test_validate_create_method():
     response_body = response.json()
 
     assert response.status_code == 201
-    with open("../schemas/create.json") as file:
+    with open("schemas/create.json") as file:
         validate(response_body, schema=json.loads(file.read()))
 
 
