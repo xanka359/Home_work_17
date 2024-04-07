@@ -1,4 +1,5 @@
-import jsonschema
+import json
+
 import requests
 from jsonschema import validate
 
@@ -11,10 +12,12 @@ payload = {"email": "eve.holt@reqres.in", "password": "cityslicka"}
 def test_validate_login_method():
     response = requests.post(url=url, data=payload)
     response_body = response.json()
-    schema = load_schema("../schemas/login.json")
+    schema = load_schema("login.json")
 
     assert response.status_code == 200
-    jsonschema.validate(response_body, schema)
+    with open(schema) as file:
+        schema = json.load(file)
+        validate(response_body, schema=schema)
 
 
 def test_unsuccessful_login_without_password():

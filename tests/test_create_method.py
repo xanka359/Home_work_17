@@ -1,18 +1,19 @@
 import json
-
-import jsonschema
 import requests
 
 from utils import load_schema
+from jsonschema import validate
 
 
 def test_validate_create_method():
     response = requests.post("https://reqres.in/api/users", data={"name": "morpheus", "job": "master"})
     response_body = response.json()
-    schema = load_schema("../schemas/create.json")
+    schema = load_schema("create.json")
 
     assert response.status_code == 201
-    jsonschema.validate(response_body, schema)
+    with open(schema) as file:
+        schema = json.load(file)
+        validate(response_body, schema=schema)
 
 
 def test_options_returns_in_response_create_method():
